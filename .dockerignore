@@ -1,0 +1,23 @@
+# IDEs local configs
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Source Control & Docs
+.git
+.gitignore
+README.md
+docker-compose.yml
+.env
+
+# .NET Build outputs
+**/bin/
+**/obj/
+
+# Frontend Build outputs & dependencies
+**/node_modules/
+**/dist/
+**/out/
