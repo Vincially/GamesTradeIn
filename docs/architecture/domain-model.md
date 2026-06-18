@@ -17,7 +17,7 @@ classDiagram
         class Wallet {
             <<Value Object>>
             +Decimal Balance
-            +Credit(amount)
+            +Deposit(amount)
             +Debit(amount)
         }
         class WishlistItem {
