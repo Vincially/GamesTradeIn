@@ -1,18 +1,18 @@
-# GamesTradeIn 🎮
+# GamesTradeIn
 
-An open-source, high-performance digital game trading, selling, and rental platform built with modern architectural patterns. This project showcases enterprise-grade software engineering practices, featuring a **.NET Backend** leveraging DDD and Clean Architecture, and a **React PWA Frontend**.
+An open-source, high-performance digital game trading, selling, and rental platform. This project showcases enterprise-grade software engineering practices, featuring a **.NET Backend** leveraging DDD and Clean Architecture, and a **React PWA Frontend**.
 
 ---
 
-## 🚀 Key Features & Business Rules
-* **Digital-Only Ecosystem:** Tailored for digital game licenses, keys, and account access across platforms (PS5, Xbox Series S/X, Switch, Steam, Epic, GoG).
+## Key Features & Business Rules
+* **Digital-Only Ecosystem:** Only for digital game licenses, keys, and access across platforms (PS5, Xbox Series S/X, Switch, Steam, Epic, GoG).
 * **Unified Rental System:** Allows users to rent digital access for a specified duration, supporting both premium (paid via virtual wallet) and free tier (loan) options.
 * **Secured Wallet (Escrow):** Financial transactions are held in a secure domain escrow during active rentals and only released upon successful return validation.
 * **Smart Wishlist Matchmaking:** Automatic background matching between users' wishlists and available inventory titles.
 
 ---
 
-## 🛠️ Tech Stack & Local Environment
+## Tech Stack & Local Environment
 
 The entire ecosystem is containerized for seamless local development:
 * **Backend:** .NET 10, C#, Minimal APIs, Entity Framework Core, Dapper, MediatR.
@@ -22,7 +22,7 @@ The entire ecosystem is containerized for seamless local development:
 
 ---
 
-## 📐 System Architecture & Diagrams
+## System Architecture & Diagrams
 
 This project is strictly documented using **Mermaid.js**. You can view our deep-dive technical specifications inside the `docs/architecture/` folder.
 
