@@ -1,6 +1,0 @@
-@GamesTradeIn.API_HostAddress = http://localhost:5153
-
-GET http://localhost:5135/api/users/
-Accept: application/json
-
-###

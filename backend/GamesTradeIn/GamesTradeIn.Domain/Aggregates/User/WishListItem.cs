@@ -1,9 +1,21 @@
-namespace GamesTradeIn.Domain.Aggregates.UserAggregates;
+using System.Runtime.InteropServices.JavaScript;
+
+namespace GamesTradeIn.Domain.Aggregates.User;
 
 public class WishListItem
 {
-    public Guid Id { get; set; }
-    public string Title { get; set; }
-    public string Platform { get; set; }
-    public DateTime AddedAt { get; set; }
+    public Guid Id { get; init; }
+    public string Title { get; set; } = null!;
+    public string Platform { get; set; } = null!;
+    public DateTime AddedAt { get; private set; }
+    
+    private WishListItem() {}
+    
+    public WishListItem(Guid id, string title, string platform)
+    {
+        Id = id;
+        Title = title;
+        Platform = platform;
+        AddedAt = DateTime.UtcNow.Date;
+    }
 }

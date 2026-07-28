@@ -1,4 +1,4 @@
-using GamesTradeIn.Domain.Intefaces;
+using GamesTradeIn.Domain.Repositories;
 using GamesTradeIn.Infrastructure.Data.Context;
 using GamesTradeIn.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
