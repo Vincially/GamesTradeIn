@@ -33,7 +33,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.OwnsMany(user => user.WishList, wishListBuilder =>
         {
-            wishListBuilder.ToTable("WishList");
+            wishListBuilder.ToTable("Wishlists");
             wishListBuilder.HasKey(wishList => wishList.Id);
             wishListBuilder.Property(w => w.Title)
                 .HasMaxLength(250)
@@ -42,7 +42,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 .HasMaxLength(100)
                 .IsRequired();
             wishListBuilder.WithOwner()
-                .HasForeignKey("User");
+                .HasForeignKey("UserId");
         });
     }
 }

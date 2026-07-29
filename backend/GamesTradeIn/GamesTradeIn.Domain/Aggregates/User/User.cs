@@ -5,8 +5,8 @@ namespace GamesTradeIn.Domain.Aggregates.User;
 public class User
 {
     public Guid Id { get; init; }
-    public string Name { get; private set; } = null!;
-    public string Email { get; private set; } = null!;
+    public string Name { get; private set; }
+    public string Email { get; private set; }
     public Wallet Wallet { get; private set; }
     private readonly List<WishListItem> _wishlist = [];
     public IReadOnlyCollection<WishListItem> WishList => _wishlist.AsReadOnly();

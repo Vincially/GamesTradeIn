@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
     "name" : "Vincially",
-    "email" : "vincially@hotmail.com",
+    "email" : "teste@hotmail.com",
     "balance": 20000,
     "wishlist": [
     {

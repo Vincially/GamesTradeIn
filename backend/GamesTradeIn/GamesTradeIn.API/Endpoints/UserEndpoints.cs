@@ -17,8 +17,8 @@ public static class UserEndpoints
             IMessageBus bus,
             CancellationToken cancellationToken) =>
             {
-                var userId = await bus.InvokeAsync<CreateUserCommand>(command, cancellationToken);
-                return Results.CreatedAtRoute("GetUserByIdAsync", new { id = userId }, new { Id = userId });
+                var userId = await bus.InvokeAsync<Guid>(command, cancellationToken);
+                return Results.Created($"/api/users/{userId}", new { Id = userId });
             }
         );
             
@@ -28,12 +28,12 @@ public static class UserEndpoints
                 CancellationToken cancellationToken) =>
             {
                 var query = new GetUserProfileQuery(id);
-                var profile = await bus.InvokeAsync<GetUserProfileQuery>(query);
+                var profile = await bus.InvokeAsync<UserProfileDto>(query);
                 
                 return profile is not null
                     ? Results.Ok(profile)
                     : Results.NotFound(new { Message = "User not found" });
             })
-        .WithName("GetUserProfile");
+        .WithName("GetUserByIdAsync");
     }
 }

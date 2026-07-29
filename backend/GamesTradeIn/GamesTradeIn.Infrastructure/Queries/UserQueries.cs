@@ -14,15 +14,35 @@ public class UserQueries(GamesTradeInDbContext context) : IUserQueries
 
         const string sql = """
                             SELECT 
-                                u."Id",
-                                u."Name",
-                                u."Balance" AS WalletBalance,
-                                (SELECT COUNT(1) FROM "WishlistItems" WHERE "UserId" = u."Id")
-                            FROM "Users" u
-                            INNER JOIN "Wallets" w ON w."UserId" = u."Id"
-                            WHERE u."Id" = @Id
+                                "Id", 
+                                "Name", 
+                                "Email", 
+                                "WalletBalance"
+                            FROM "Users"
+                            WHERE "Id" = @Id;
+
+                            SELECT 
+                                "Id",
+                                "Title",
+                                "Platform"
+                                FROM "Wishlists" 
+                                WHERE "UserId" = @Id;
                             """;
 
-        return await connection.QueryFirstOrDefaultAsync<UserProfileDto>(sql, new { Id = id });
+        using var multi = await connection.QueryMultipleAsync(sql, new {Id = id});
+
+        var user = await multi.ReadFirstOrDefaultAsync();
+
+        if (user is null)
+            return null;
+        
+        var wishlist = (await multi.ReadAsync<WishlistItemDto>()).ToList();
+
+        return new UserProfileDto(
+            (Guid)user.Id,
+            (string)user.Name,
+            (string)user.Email,
+            (decimal)user.WalletBalance,
+            wishlist);
     }
 }

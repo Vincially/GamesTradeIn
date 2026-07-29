@@ -21,8 +21,8 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Host.UseWolverine(opts =>
 {
     opts.Discovery.IncludeAssembly(typeof(CreateUserCommand).Assembly);
+    opts.Discovery.IncludeAssembly(typeof(GetUserProfileQuery).Assembly);
     opts.ServiceLocationPolicy = ServiceLocationPolicy.AlwaysAllowed;
-    opts.Durability.Mode = DurabilityMode.MediatorOnly;
 });
 
 // Database Connection

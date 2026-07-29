@@ -5,8 +5,8 @@ namespace GamesTradeIn.Domain.Aggregates.User;
 public class WishListItem
 {
     public Guid Id { get; init; }
-    public string Title { get; set; } = null!;
-    public string Platform { get; set; } = null!;
+    public string Title { get; set; }
+    public string Platform { get; set; }
     public DateTime AddedAt { get; private set; }
     
     private WishListItem() {}
