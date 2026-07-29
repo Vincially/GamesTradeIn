@@ -5,9 +5,12 @@ using GamesTradeIn.Application.Features.Commands.Users.CreateUser;
 using GamesTradeIn.Application.Features.Queries.GetUserProfile;
 using GamesTradeIn.Domain.Repositories;
 using GamesTradeIn.Infrastructure;
+using GamesTradeIn.Infrastructure.Data.Context;
 using GamesTradeIn.Infrastructure.Queries;
 using GamesTradeIn.Infrastructure.Repositories;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using JasperFx.CodeGeneration.Model;
+using Microsoft.EntityFrameworkCore;
+using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +18,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.AddMediatR(cfg =>
+builder.Host.UseWolverine(opts =>
 {
-    cfg.RegisterServicesFromAssembly(typeof(GetUserProfileQueryHandler).Assembly);
-    cfg.RegisterServicesFromAssembly(typeof(CreateUserCommandHandler).Assembly);
-    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    opts.Discovery.IncludeAssembly(typeof(CreateUserCommand).Assembly);
+    opts.ServiceLocationPolicy = ServiceLocationPolicy.AlwaysAllowed;
+    opts.Durability.Mode = DurabilityMode.MediatorOnly;
 });
 
 // Database Connection
@@ -37,5 +40,10 @@ if (app.Environment.IsDevelopment())
 }
 app.MapUserEndpoints();
 app.UseHttpsRedirection();
+
+using (var scope = app.Services.CreateScope()) {
+    var dbContext = scope.ServiceProvider.GetRequiredService<GamesTradeInDbContext>();
+    await dbContext.Database.MigrateAsync();
+}
 
 app.Run();

@@ -9,7 +9,7 @@
     <ItemGroup>
       <PackageReference Include="Dapper" Version="2.1.79" />
       <PackageReference Include="FluentValidation" Version="12.1.1" />
-      <PackageReference Include="MediatR" Version="14.2.0" />
+      <PackageReference Include="WolverineFx" Version="6.23.1" />
     </ItemGroup>
 
     <ItemGroup>

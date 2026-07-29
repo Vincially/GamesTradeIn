@@ -1,4 +1,5 @@
-using MediatR;
+
+using Wolverine.Shims.MediatR;
 
 namespace GamesTradeIn.Application.Features.Commands.Users.CreateUser;
 

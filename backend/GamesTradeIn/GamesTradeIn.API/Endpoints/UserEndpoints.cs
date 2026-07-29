@@ -1,7 +1,7 @@
 using GamesTradeIn.Application.Features.Commands.Users.CreateUser;
 using GamesTradeIn.Application.Features.Queries.GetUserProfile;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Wolverine;
 
 namespace GamesTradeIn.API.Endpoints;
 
@@ -14,21 +14,21 @@ public static class UserEndpoints
 
         group.MapPost("/", async (
         [FromBody] CreateUserCommand command,
-            IMediator mediator,
+            IMessageBus bus,
             CancellationToken cancellationToken) =>
             {
-                var userId = await mediator.Send(command, cancellationToken);
+                var userId = await bus.InvokeAsync<CreateUserCommand>(command, cancellationToken);
                 return Results.CreatedAtRoute("GetUserByIdAsync", new { id = userId }, new { Id = userId });
             }
         );
             
         group.MapGet("/{id:guid}", async (
                 Guid id,
-                IMediator mediator,
+                IMessageBus bus,
                 CancellationToken cancellationToken) =>
             {
                 var query = new GetUserProfileQuery(id);
-                var profile = await mediator.Send(query, cancellationToken);
+                var profile = await bus.InvokeAsync<GetUserProfileQuery>(query);
                 
                 return profile is not null
                     ? Results.Ok(profile)
